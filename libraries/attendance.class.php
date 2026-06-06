@@ -14,23 +14,6 @@ class attendance {
 		$this->attendance_table = config::DB_PREFIX . 'attendance';
 		$this->models_table = config::DB_PREFIX . 'models';
 	}
-
-    // // IF you use auto increment you dont need this function
-    // public function lastAttendanceID(){
-    //     $query = "SELECT * FROM {$this->attendance_table} ORDER BY `id_BRAND` DESC LIMIT 1";
-    //     mysql::query($query);
-    //     $data = mysql::select($query);
-    //     if(!empty($data)) {
-    //         return $data[0]['id_BRAND'];
-    //     }
-    //     return 0;
-    // }
-	
-	/**
-	 * Brand selection
-	 * @param type $id
-	 * @return type
-	 */
 	public function getAttendance($id) {
 		$id = mysql::escapeFieldForSQL($id);
 
@@ -93,9 +76,6 @@ class attendance {
 	 */
 	public function insertAttendance($data) {
 		$data = mysql::escapeFieldsArrayForSQL($data);
-
-        // IF you use auto increment you dont need this part and you should also remove id_BRAND from insert query
-        //$brandID = $this->lastBrandID()+1;
 
 		$query = "  INSERT INTO {$this->attendance_table}
 								(
