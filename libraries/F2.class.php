@@ -219,10 +219,6 @@ class members {
 		}
 	}
 
-	/**
-	 * Оновлення даних про замовлену послугу для конкретного члена
-	 * @param type $data
-	 */
 	public function updateOrderedService($data) {
 
 		$data = mysql::escapeFieldsArrayForSQL($data);
@@ -240,11 +236,7 @@ class members {
 			mysql::query($query);
 		} 
 	}
-
-	/**
-	 * Вставка даних про члена
-	 * @param type $data
-	 */
+	
 	public function insertMember($data) {
 
 		$data = mysql::escapeFieldsArrayForSQL($data);
@@ -280,14 +272,6 @@ class members {
 
 		mysql::query($query);
 	}
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-
-
 	public function deletePayments($memberId) {
 
 		$memberId = mysql::escapeFieldForSQL($memberId);
@@ -375,28 +359,6 @@ class members {
 		mysql::query($query);
 	}
 	
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-/*				ВИДАЛЕННЯ ТУТ 					*/
-
-	
 	/**
 	 * Update ordered workout plans for the member
 	 * @param type $data
@@ -476,70 +438,6 @@ class members {
 	}
 
 
-
-
-
-/*								STOP							*/
-
-/* 					EDIT HERE					*/
-	// public function getMemberData($memberId) {
-	// 	$memberId = mysql::escapeFieldForSQL($memberId);
-
-	// 	$query = "
-	// 		SELECT m.id_Member, m.name, l.Membership AS Membership, w.workout_name, s.name AS staff_name
-	// 		FROM {$this->member_table} m
-	// 		LEFT JOIN membership_level l ON m.fk_level = l.id_Level
-	// 		LEFT JOIN workout_plan w ON m.id_Member = w.fk_Memberid_Member  -- Corrected column name
-	// 		LEFT JOIN staff s ON w.fk_Staffid_Staff = s.id_Staff  -- Corrected join through workout_plan table
-	// 		WHERE m.id_Member = '{$memberId}'
-	// 	";
-
-	// 	return mysql::select($query);
-	// }
-
-	// public function getMemberData($memberId) { //correct func
-	// 	$memberId = mysql::escapeFieldForSQL($memberId);
-	
-	// 	$query = "
-	// 		SELECT 
-	// 			m.id_Member, 
-	// 			m.name, 
-	// 			l.Membership, 
-	// 			w.workout_name, 
-	// 			s.name AS staff_name
-	// 		FROM {$this->member_table} m
-	// 		LEFT JOIN membership_level l ON m.fk_level = l.id_Level
-	// 		LEFT JOIN workout_plan w ON m.id_Member = w.fk_Memberid_Member  -- Corrected column name
-	// 		LEFT JOIN staff s ON w.fk_Staffid_Staff = s.id_Staff
-	// 		WHERE m.id_Member = '{$memberId}'
-	// 	";
-	
-	// 	return mysql::select($query);
-	// }
-
-	// public function getMemberData($memberId) {
-	// 	$memberId = mysql::escapeFieldForSQL($memberId);
-	
-	// 	$query = "
-	// 		SELECT 
-	// 			m.id_Member, 
-	// 			m.Name, 
-	// 			l.Membership, 
-	// 			w.id_Workout_plan,        -- ID плану тренувань (для селекту)
-	// 			w.Workout_name,           -- Назва плану тренувань (для перегляду)
-	// 			s.id_Staff,               -- ID тренера (для селекту)
-	// 			s.Name AS staff_name      -- Ім'я тренера (для перегляду)
-	// 		FROM {$this->member_table} m
-	// 		LEFT JOIN membership_level l ON m.fk_level = l.id_Level
-	// 		LEFT JOIN Workout_plan w ON m.id_Member = w.fk_Memberid_Member
-	// 		LEFT JOIN staff s ON w.fk_Staffid_Staff = s.id_Staff
-	// 		WHERE m.id_Member = '{$memberId}'
-	// 	";
-	
-	// 	return mysql::select($query);
-	// }
-	
-
 	public function getMemberData($memberId) {
 		$memberId = mysql::escapeFieldForSQL($memberId);
 	
@@ -547,12 +445,12 @@ class members {
 			SELECT 
 				m.id_Member, 
 				m.name, 
-				m.fk_level,              -- додано для select у формі
+				m.fk_level,              
 				l.Membership, 
 				w.workout_name, 
-				w.id_Workout_plan,       -- додано для select у формі
+				w.id_Workout_plan,       
 				s.name AS staff_name, 
-				s.id_Staff               -- додано для select у формі
+				s.id_Staff               
 			FROM {$this->member_table} m
 			LEFT JOIN membership_level l ON m.fk_level = l.id_Level
 			LEFT JOIN workout_plan w ON m.id_Member = w.fk_Memberid_Member
@@ -592,62 +490,12 @@ class members {
 		return mysql::query($query);
 	}
 
-	// public function updateMember($memberId, $name, $membershipLevelId, $workoutPlanId, $staffId) {
-	// 	$memberId = mysql::escapeFieldForSQL($memberId);
-	// 	$name = mysql::escapeFieldForSQL($name);
-	// 	$membershipLevelId = mysql::escapeFieldForSQL($membershipLevelId);
-	// 	$workoutPlanId = mysql::escapeFieldForSQL($workoutPlanId);
-	// 	$staffId = mysql::escapeFieldForSQL($staffId);
-
-	// 	$query = "
-	// 		UPDATE {$this->member_table}
-	// 		SET 
-	// 			name = '{$name}', 
-	// 			fk_level = '{$membershipLevelId}', 
-	// 			fk_workout_id = '{$workoutPlanId}',  -- Corrected to fk_workout_id
-	// 			fk_staff_id = '{$staffId}'  -- Corrected to fk_staff_id
-	// 		WHERE id_Member = '{$memberId}'
-	// 	";
-
-	// 	return mysql::query($query);
-	// }
-
-	// public function updateMember($id, $membershipLevel, $name, $workoutId, $staffId) {
-	// 	$id = mysql::escapeFieldForSQL($id);
-	// 	$membershipLevel = mysql::escapeFieldForSQL($membershipLevel);
-	// 	$name = mysql::escapeFieldForSQL($name);
-	// 	$workoutId = mysql::escapeFieldForSQL($workoutId);
-	// 	$staffId = mysql::escapeFieldForSQL($staffId);
-	
-	// 	// Оновлюємо дані учасника
-	// 	$query1 = "
-	// 		UPDATE member
-	// 		SET name = '{$name}', fk_level = '{$membershipLevel}'
-	// 		WHERE id_Member = '{$id}'
-	// 	";
-	
-	// 	// Оновлюємо запис у workout_plan (за членом)
-	// 	$query2 = "
-	// 		UPDATE workout_plan
-	// 		SET fk_Staffid_Staff = '{$staffId}'
-	// 		WHERE id_Workout_plan = '{$workoutId}'
-	// 		  AND fk_Memberid_Member = '{$id}'
-	// 	";
-	
-	// 	$success1 = mysql::query($query1);
-	// 	$success2 = mysql::query($query2);
-	
-	// 	return $success1 && $success2;
-	// }
-
 	public function updateMember($id, $membershipLevel, $name, $workoutId, $staffId, $workout_name) {
 		$id = mysql::escapeFieldForSQL($id);
 		$membershipLevel = mysql::escapeFieldForSQL($membershipLevel);
 		$name = mysql::escapeFieldForSQL($name);
 		$workoutId = mysql::escapeFieldForSQL($workoutId);
 		$staffId = mysql::escapeFieldForSQL($staffId);
-	
-		// Оновлення учасника
 		$query1 = "
 			UPDATE member
 			SET name = '{$name}', fk_level = '{$membershipLevel}'
@@ -659,7 +507,6 @@ class members {
 			return false;
 		}
 	
-		// Оновлення staff для workout
 		$query2 = "
 			UPDATE workout_plan
 			SET fk_Staffid_Staff = '{$staffId}', Workout_name = '{$workout_name}'
@@ -674,24 +521,6 @@ class members {
 	
 		return true;
 	}
-	
-	
-	
-	
-
-	// public function getStaffData($staffId) {
-	// 	$staffId = mysql::escapeFieldForSQL($staffId);
-
-	// 	$query = "
-	// 		SELECT staff_id, name, position
-	// 		FROM {$this->staff_table}
-	// 		WHERE staff_id = '{$staffId}'
-	// 	";
-
-	// 	return mysql::select($query);
-	// }
-
-
 
 	public function getStaffList() {
 		$query = "
@@ -718,15 +547,6 @@ class members {
         return mysql::select($query);
     }
 	
-	
-
-
-/* 					EDIT BEFORE					*/
-
-/* 					CREATE HERE					*/
-
-
-
     public function checkIfMemberExistsWithID($id_Member) {
 
         $id_Member = (int)$id_Member;
@@ -763,10 +583,6 @@ class members {
         mysql::query($query);
     }
 
-
-
-
-	// 1404
 	public function createMemberAuto($name, $level) {
 		$name = mysql::escapeFieldForSQL($name);
 		$level = (int)$level;
